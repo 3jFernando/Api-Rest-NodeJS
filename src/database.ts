@@ -4,7 +4,7 @@ class DBConnect {
 
     public async conection() {
     
-        const url = "mongodb+srv://userapp:nnZqcv6BErwaJNAw@cluster0-7sj4r.mongodb.net/test?retryWrites=true&w=majority";
+        const url = "url de atlas";
 
         const options = {
             useNewUrlParser: true,

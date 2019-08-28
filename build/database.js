@@ -15,7 +15,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 class DBConnect {
     conection() {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = "mongodb+srv://userapp:nnZqcv6BErwaJNAw@cluster0-7sj4r.mongodb.net/test?retryWrites=true&w=majority";
+            const url = "url de atlas";
             const options = {
                 useNewUrlParser: true,
                 reconnectTries: 60,
