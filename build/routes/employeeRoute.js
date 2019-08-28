@@ -11,9 +11,10 @@ class RoutesAPI {
         this.configRoutes();
     }
     configRoutes() {
-        this.router.get("/employe", employeeController_1.default.index);
-        this.router.get("/employe/store", employeeController_1.default.store);
-        this.router.get("/employe/show/:id", employeeController_1.default.show);
+        this.router.get("/employee", employeeController_1.default.index);
+        this.router.post("/employee", employeeController_1.default.store);
+        this.router.get("/employee/:id", employeeController_1.default.show);
+        this.router.delete("/employee/:id", employeeController_1.default.destroy);
     }
 }
 const api = new RoutesAPI();

@@ -14,27 +14,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Employee_1 = __importDefault(require("../models/Employee"));
 class EmployeeController {
     index(req, res) {
-        Employee_1.default.find((err, employees) => {
-            if (err)
-                res.status(500).send(err.message);
+        Employee_1.default.find((error, employees) => {
+            if (error)
+                res.status(500).send("Error al cargar los empleados ");
             res.status(200).send(employees);
         });
     }
     show(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield Employee_1.default.find({ "_id": req.params.id }, (err, employe) => {
-                if (err)
-                    res.status(500).send(err.message);
-                res.status(200).send(employe);
+            const _id = req.params.id;
+            yield Employee_1.default.find({ "_id": _id }, (error, employee) => {
+                if (error)
+                    res.status(500).send("Error al guardar " + error.message);
+                res.status(200).send(employee);
             });
         });
     }
     store(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            Employee_1.default.create({ name: "Empleado 3", phone: 123445 }, (err) => {
+            if (req.body.name == '')
+                res.status(500).send("El nombre es obligatorio");
+            Employee_1.default.create({ name: req.body.name, phone: req.body.phone }, (err) => {
                 if (err)
                     res.status(500).send(err.message);
-                res.status(200).send("empleado guardadi");
+                res.status(200).send("empleado guardado");
+            });
+        });
+    }
+    destroy(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = req.params.id;
+            Employee_1.default.deleteOne({ "_id": id }, (err) => {
+                if (err)
+                    res.status(500).send("error al tratar de eliminar el empleado");
+                res.status(200).send("eliminado");
             });
         });
     }

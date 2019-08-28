@@ -15,12 +15,19 @@ const mongoose_1 = __importDefault(require("mongoose"));
 class DBConnect {
     conection() {
         return __awaiter(this, void 0, void 0, function* () {
-            const uri = "mongodb+srv://app:BRgecuG3rhshbbxM@cluster0-7sj4r.mongodb.net/test?retryWrites=true&w=majority";
-            mongoose_1.default.connect(uri, { useNewUrlParser: true });
-            yield mongoose_1.default.connection.on("error", err => {
-                console.log(`no se puede conectar ${err}`);
-            });
-            console.log(`conectado :D`);
+            const url = "mongodb+srv://userapp:nnZqcv6BErwaJNAw@cluster0-7sj4r.mongodb.net/test?retryWrites=true&w=majority";
+            const options = {
+                useNewUrlParser: true,
+                reconnectTries: 60,
+                reconnectInterval: 1000,
+                poolSize: 10,
+                bufferMaxEntries: 0 // If not connected, return errors immediately rather than waiting for reconnect
+            };
+            yield mongoose_1.default.connect(url, options)
+                .then(() => {
+                console.log("conexion establecida");
+            })
+                .catch((error) => console.log("conexion perdida" + error.message));
         });
     }
 }

@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import EmployeeController from '../controllers/employeeController';
 
 class RoutesAPI {
@@ -10,9 +10,10 @@ class RoutesAPI {
     }
 
     configRoutes(): void {
-        this.router.get("/employe", EmployeeController.index);
-        this.router.get("/employe/store", EmployeeController.store);
-        this.router.get("/employe/show/:id", EmployeeController.show);
+        this.router.get("/employee", EmployeeController.index);
+        this.router.post("/employee", EmployeeController.store);
+        this.router.get("/employee/:id", EmployeeController.show);
+        this.router.delete("/employee/:id", EmployeeController.destroy);
     }
 
 }

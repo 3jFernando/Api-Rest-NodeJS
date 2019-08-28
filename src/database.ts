@@ -3,13 +3,23 @@ import mongoose from 'mongoose';
 class DBConnect {
 
     public async conection() {
-        const uri = "mongodb+srv://app:BRgecuG3rhshbbxM@cluster0-7sj4r.mongodb.net/test?retryWrites=true&w=majority";
-        mongoose.connect(uri, { useNewUrlParser: true });
-        await mongoose.connection.on("error", err => {
-            console.log(`no se puede conectar ${err}`);
-        });
+    
+        const url = "mongodb+srv://userapp:nnZqcv6BErwaJNAw@cluster0-7sj4r.mongodb.net/test?retryWrites=true&w=majority";
 
-        console.log(`conectado :D`);
+        const options = {
+            useNewUrlParser: true,
+            reconnectTries: 60,
+            reconnectInterval: 1000,
+            poolSize: 10,
+            bufferMaxEntries: 0 // If not connected, return errors immediately rather than waiting for reconnect
+          }
+
+        await mongoose.connect(url,options)
+        .then(() => {
+            console.log("conexion establecida");
+        })
+        .catch((error:any) => console.log("conexion perdida" + error.message));
+    
     }
 
 }
