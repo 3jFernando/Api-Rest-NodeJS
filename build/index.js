@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const employeeRoute_1 = __importDefault(require("./routes/employeeRoute"));
+const clientRoute_1 = __importDefault(require("./routes/clientRoute"));
 const database_1 = __importDefault(require("./database"));
 class Server {
     constructor() {
@@ -14,15 +15,16 @@ class Server {
         this.startRoutes();
     }
     config() {
-        this.app.set('port', process.env.PORT || 2300);
+        this.app.set('port', process.env.PORT || 1200);
         this.app.use(express_1.default.json());
     }
     startRoutes() {
         this.app.use("/api", employeeRoute_1.default);
+        this.app.use("/api", clientRoute_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
-            console.log("running serves " + this.app.get('port'));
+            console.log("running serve s" + this.app.get('port'));
         });
     }
 }

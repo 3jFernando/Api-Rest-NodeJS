@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 
-import routes from './routes/employeeRoute';
+import routesEmployees from './routes/employeeRoute';
+import routesClients from './routes/clientRoute';
 import db from './database';
 
 class Server {
@@ -15,17 +16,18 @@ class Server {
     }    
 
     config(): void {
-        this.app.set('port', process.env.PORT || 2300);
+        this.app.set('port', process.env.PORT || 1200);
         this.app.use(express.json());
     }
 
     startRoutes(): void {
-        this.app.use("/api", routes);
+        this.app.use("/api", routesEmployees);
+        this.app.use("/api", routesClients);
     }
 
     start(): void{
         this.app.listen(this.app.get('port'), () => {
-            console.log("running serves " + this.app.get('port'))
+            console.log("running serve s" + this.app.get('port'))
         });
     }
 

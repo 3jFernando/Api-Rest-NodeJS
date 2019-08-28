@@ -32,9 +32,18 @@ class EmployeeController {
     }
     store(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (req.body.name == '')
-                res.status(500).send("El nombre es obligatorio");
-            Employee_1.default.create({ name: req.body.name, phone: req.body.phone }, (err) => {
+            //DATOS DEL EMPLEADO
+            const data = {
+                name: req.body.name,
+                phone: req.body.phone,
+                username: req.body.username,
+                password: req.body.password,
+                address: {
+                    lat: req.body.lat,
+                    lng: req.body.lng,
+                }
+            };
+            Employee_1.default.create(data, (err) => {
                 if (err)
                     res.status(500).send(err.message);
                 res.status(200).send("empleado guardado");
@@ -48,6 +57,20 @@ class EmployeeController {
                 if (err)
                     res.status(500).send("error al tratar de eliminar el empleado");
                 res.status(200).send("eliminado");
+            });
+        });
+    }
+    login(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const username = req.body.username;
+            const password = req.body.password;
+            yield Employee_1.default.find({
+                'username': username,
+                'password': password
+            }, (err, employee) => {
+                if (err)
+                    res.status(500).send("Error");
+                res.status(200).send(employee);
             });
         });
     }

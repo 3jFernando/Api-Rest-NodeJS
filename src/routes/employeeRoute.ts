@@ -14,6 +14,7 @@ class RoutesAPI {
         this.router.post("/employee", EmployeeController.store);
         this.router.get("/employee/:id", EmployeeController.show);
         this.router.delete("/employee/:id", EmployeeController.destroy);
+        this.router.post("/employee/login", EmployeeController.login);
     }
 
 }
