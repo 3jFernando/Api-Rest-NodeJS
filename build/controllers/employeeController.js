@@ -14,19 +14,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Employee_1 = __importDefault(require("../models/Employee"));
 class EmployeeController {
     index(req, res) {
-        Employee_1.default.find((error, employees) => {
-            if (error)
-                res.status(500).send("Error al cargar los empleados ");
-            res.status(200).send(employees);
+        Employee_1.default.find((err, employees) => {
+            if (err)
+                res.status(500).send({ message: "Error" + err });
+            res.status(200).send({
+                message: "Exitoso",
+                employees: employees
+            });
         });
     }
     show(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const _id = req.params.id;
-            yield Employee_1.default.find({ "_id": _id }, (error, employee) => {
-                if (error)
-                    res.status(500).send("Error al guardar " + error.message);
-                res.status(200).send(employee);
+            yield Employee_1.default.find({ "_id": _id }, (err, employee) => {
+                if (err)
+                    res.status(500).send({ message: "Error" + err });
+                res.status(200).send({
+                    message: "Exitoso",
+                    employee: employee
+                });
             });
         });
     }
@@ -45,8 +51,10 @@ class EmployeeController {
             };
             Employee_1.default.create(data, (err) => {
                 if (err)
-                    res.status(500).send(err.message);
-                res.status(200).send("empleado guardado");
+                    res.status(500).send({ message: "Error" + err });
+                res.status(200).send({
+                    message: "Exitoso"
+                });
             });
         });
     }
@@ -55,8 +63,10 @@ class EmployeeController {
             const id = req.params.id;
             Employee_1.default.deleteOne({ "_id": id }, (err) => {
                 if (err)
-                    res.status(500).send("error al tratar de eliminar el empleado");
-                res.status(200).send("eliminado");
+                    res.status(500).send({ message: "Error" + err });
+                res.status(200).send({
+                    message: "Exitoso"
+                });
             });
         });
     }
@@ -69,8 +79,11 @@ class EmployeeController {
                 'password': password
             }, (err, employee) => {
                 if (err)
-                    res.status(500).send("Error");
-                res.status(200).send(employee);
+                    res.status(500).send({ message: "Error" + err });
+                res.status(200).send({
+                    message: "Exitoso",
+                    employee: employee
+                });
             });
         });
     }

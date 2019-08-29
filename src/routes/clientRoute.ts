@@ -1,5 +1,5 @@
 import { Router } from "express";
-import clientController from "../controllers/ClientController";
+import clientController from "../controllers/clientController";
 
 class ClientRoute {
 

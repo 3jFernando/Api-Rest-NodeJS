@@ -5,9 +5,12 @@ class EmployeeController {
     
     public index(req: Request, res: Response) {
 
-        Employee.find((error:any, employees) => {
-            if(error) res.status(500).send("Error al cargar los empleados "); 
-            res.status(200).send(employees); 
+        Employee.find((err:any, employees) => {
+            if(err) res.status(500).send({ message: "Error" + err }); 
+            res.status(200).send({
+                message: "Exitoso",
+                employees: employees
+            }); 
         });
 
     }
@@ -16,9 +19,12 @@ class EmployeeController {
 
         const _id = req.params.id;
 
-        await Employee.find({"_id": _id}, (error:any, employee) => {
-            if(error) res.status(500).send("Error al guardar " + error.message);
-            res.status(200).send(employee); 
+        await Employee.find({"_id": _id}, (err:any, employee) => {
+            if(err) res.status(500).send({ message: "Error" + err }); 
+            res.status(200).send({
+                message: "Exitoso",
+                employee: employee
+            }); 
         });
 
     }
@@ -38,8 +44,10 @@ class EmployeeController {
         }
 
         Employee.create(data, (err:any) => {
-            if (err) res.status(500).send(err.message);
-            res.status(200).send("empleado guardado");
+            if(err) res.status(500).send({ message: "Error" + err }); 
+            res.status(200).send({
+                message: "Exitoso"
+            });
         }); 
 
     }
@@ -49,8 +57,10 @@ class EmployeeController {
         const id = req.params.id;
 
         Employee.deleteOne({"_id":id}, (err:any) => {
-            if(err) res.status(500).send("error al tratar de eliminar el empleado");        
-            res.status(200).send("eliminado");
+            if(err) res.status(500).send({ message: "Error" + err }); 
+            res.status(200).send({
+                message: "Exitoso"
+            });
         });
 
     } 
@@ -64,11 +74,11 @@ class EmployeeController {
             'username': username,
             'password': password
         }, (err: any, employee) => {
-
-            if(err) res.status(500).send("Error");
-
-            res.status(200).send(employee);
-
+            if(err) res.status(500).send({ message: "Error" + err }); 
+            res.status(200).send({
+                message: "Exitoso",
+                employee: employee
+            });
         });
 
     }

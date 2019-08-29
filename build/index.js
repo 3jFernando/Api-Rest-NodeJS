@@ -4,9 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const database_1 = __importDefault(require("./database"));
 const employeeRoute_1 = __importDefault(require("./routes/employeeRoute"));
 const clientRoute_1 = __importDefault(require("./routes/clientRoute"));
-const database_1 = __importDefault(require("./database"));
+const clientRoute_2 = __importDefault(require("./routes/clientRoute"));
+const teamRoute_1 = __importDefault(require("./routes/teamRoute"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -21,6 +23,8 @@ class Server {
     startRoutes() {
         this.app.use("/api", employeeRoute_1.default);
         this.app.use("/api", clientRoute_1.default);
+        this.app.use("/api", teamRoute_1.default);
+        this.app.use("/api", clientRoute_2.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

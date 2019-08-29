@@ -1,8 +1,11 @@
 import express, { Application } from 'express';
 
-import routesEmployees from './routes/employeeRoute';
-import routesClients from './routes/clientRoute';
 import db from './database';
+
+import employeesRoutes from './routes/employeeRoute';
+import clientsRoutes from './routes/clientRoute';
+import readingRoutes from './routes/clientRoute';
+import teamRouter from './routes/teamRoute';
 
 class Server {
 
@@ -21,8 +24,10 @@ class Server {
     }
 
     startRoutes(): void {
-        this.app.use("/api", routesEmployees);
-        this.app.use("/api", routesClients);
+        this.app.use("/api", employeesRoutes);
+        this.app.use("/api", clientsRoutes);
+        this.app.use("/api", teamRouter);
+        this.app.use("/api", readingRoutes);
     }
 
     start(): void{

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import EmployeeController from '../controllers/employeeController';
 
-class RoutesAPI {
+class EmployeeAPI {
 
     public router: Router = Router();
 
@@ -19,5 +19,5 @@ class RoutesAPI {
 
 }
 
-const api = new RoutesAPI();
-export default api.router;
+const employeeRoute = new EmployeeAPI();
+export default employeeRoute.router;
